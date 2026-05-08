@@ -30,6 +30,16 @@
       "@/*": ["./src/*"]
     }
   },
+
+  // // const config{
+  // //   typescript: {
+  // //     ignoreBuildErrors: true,
+  // //   },
+
+  // //     eslint: {
+  // //       ignoreDuringBuilds: true,
+  // //     },
+  // };
   "include": [
     "next-env.d.ts",
     "**/*.ts",
