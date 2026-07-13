@@ -27,3 +27,6 @@ jobs:
 
         - name: Run build
           run: npm run build
+          env:
+            # Inject a dummy placeholder to pass the validation scripts
+            DATABASE_URL: postgresql://dummy_user:dummy_pass@localhost:5432/dummy_db
