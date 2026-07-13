@@ -11,6 +11,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "@/server/db";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 /**
  * 1. CONTEXT
@@ -25,7 +26,12 @@ import { db } from "@/server/db";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
+  //const user = await auth();
+  //const user = await getKindeServerSession();
+  const { getUser } = await getKindeServerSession();
+  const user = await getUser();
   return {
+    auth: user,
     db,
     ...opts,
   };
@@ -96,6 +102,20 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
   return result;
 });
 
+const isAuthed = t.middleware(async ({ next, ctx }) => {
+  //if (!ctx.auth?.userId) {
+  if (!ctx.auth?.id) {
+    throw new Error('Unauthorized');
+  }
+
+  return next({
+    ctx: {
+      ...ctx,
+      auth: ctx.auth as Required<typeof ctx.auth>,
+    },
+  });
+});
+
 /**
  * Public (unauthenticated) procedure
  *
@@ -104,3 +124,8 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  * are logged in.
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
+export const privateProcedure = t.procedure.use(isAuthed)  
+// function auth() {
+//   throw new Error("Function not implemented.");
+// }
+

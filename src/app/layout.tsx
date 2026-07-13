@@ -1,12 +1,18 @@
 import "@/styles/globals.css";
 
 import { type Metadata } from "next";
-import { Geist, Figtree } from "next/font/google";
+import { Geist, Figtree, Noto_Sans, Playfair_Display } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
-const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
+const playfairDisplayHeading = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
+
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -23,9 +29,24 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={cn(geist.variable, "font-sans", figtree.variable)}>
+    <html
+      lang="en"
+      className={cn(
+        geist.variable,
+        "font-sans",
+        figtree.variable,
+        playfairDisplayHeading.variable,
+      )}
+    >
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
