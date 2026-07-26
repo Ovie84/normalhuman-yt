@@ -3,24 +3,33 @@ import React from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 import { atom, useAtom } from 'jotai'
 
+// I got this from Gemini
+import { keepPreviousData } from '@tanstack/react-query'
+
 export const threadIdAtom = atom<string | null>(null)
 
 const useThreads = () => {
-//   return (
-//     <div>use-threads</div>
-//   )
-    const {data: accounts} = api.account.getAccounts.useQuery()
+    //   return (
+    //     <div>use-threads</div>
+    //   )
+    const { data: accounts } = api.account.getAccounts.useQuery()
     const [accountId] = useLocalStorage('accountId', '')
     const [tab] = useLocalStorage('normalhuman-tab', 'inbox')
     const [done] = useLocalStorage('normalhuman-done', false)
     const [threadId, setThreadId] = useAtom(threadIdAtom)
 
-    const {data: threads, isFetching, refetch} = api.account.getThreads.useQuery({
+    const { data: threads, isFetching, refetch } = api.account.getThreads.useQuery({
         accountId,
         tab,
         done
     }, {
-        enabled: !!accountId && !!tab, placeholderData: /* e */ (e: any) => e, refetchInterval: 5000
+        enabled: !!accountId && !!tab, 
+        // placeholderData: /* e */ (e: any) => e, 
+
+        //Gemini Recommended update placeholder v4 
+        // to TanStack Query v5 format
+        placeholderData: keepPreviousData, // Replaces (e: any ) => e safely
+        refetchInterval: 5000
     })
 
     return {
@@ -29,7 +38,7 @@ const useThreads = () => {
         refetch,
         accountId,
         threadId, setThreadId,
-        account: accounts?.find(e => e.id === accountId)  
+        account: accounts?.find(e => e.id === accountId)
     }
 }
 

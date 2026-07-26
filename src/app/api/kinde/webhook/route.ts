@@ -1,5 +1,8 @@
 //api/kinde/webhook/route.ts
 
+// just added this for trial
+export const runtime = "nodejs"
+
 import { db } from "@/server/db";
 
 export const POST = async (request: Request) => {

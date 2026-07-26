@@ -32,14 +32,18 @@ export const GET = async( req: NextRequest ) => {
     await db.account.upsert({
         where: { id: token.accountId.toString()},
         update: {
-            accessToken: token.accessToken,
+            // accessToken: token.accessToken,
+            token: token.accessToken,
+
         },
         create: {
             id: token.accountId.toString(),
             userId,
             emailAddress: accountDetails.email,
             name: accountDetails.name,
-            accessToken: token.accessToken,
+            // accessToken: token.accessToken,
+            token: token.accessToken,
+            provider: "aurinko",
         }
     })
 

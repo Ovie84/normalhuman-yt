@@ -34,7 +34,7 @@ export const accountRouter = createTRPCRouter({
         tab: z.string()
     })).query(async ({ ctx, input }) => {
         const account = await authourizeAccountAccess(input.accountId, ctx.auth./*user*/id)
-
+     
         let filter: Prisma.ThreadWhereInput = {}
         if (input.tab === 'inbox') {
             filter.inboxStatus = true
@@ -57,7 +57,7 @@ export const accountRouter = createTRPCRouter({
     getThreads: privateProcedure.input(z.object({
         accountId: z.string(),
         tab: z.string(),
-        done: boolean()
+        done: z.boolean()
     })).query(async({ ctx, input }) => {
         //done: z.boolean()
         const account = await authourizeAccountAccess(input.accountId, ctx.auth./*user*/id)
@@ -93,9 +93,9 @@ export const accountRouter = createTRPCRouter({
                     }
                 },
             },
-            takes: 15,
+            take: 15,
             orderBy: {
-                lastMessageDates: 'desc'
+                lastMessageDate: 'desc'
             }
         })
     })

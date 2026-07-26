@@ -20,6 +20,8 @@ import useThreads from "@/hooks/use-threads";
 import { Archive, ArchiveX, Trash2, Clock, MoreVertical } from "lucide-react";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { format } from "date-fns";
+import EmailDisplay from "./email-display";
 
 const ThreadDisplay = () => {
   const { threadId, threads } = useThreads();
@@ -46,10 +48,33 @@ const ThreadDisplay = () => {
                                 <div className="text-xs line-clamp-1">
                                   {thread.emails[0]?.subject}
                                 </div>
+                                <div className="text-xs line-clamp-1">
+                                  <span className="font-medium">
+                                    Reply-to:
+                                  </span>
+                                  {thread.emails[0]?.from?.address}
+                                </div>
                               </div>
                             </div>
                         </div>
+                        {thread?.emails[0]?.sentAt && (
+                          <div className="ml-auto text-xs text-muted-foreground">
+                            {format(new Date(thread.emails[0]?.sentAt), 'PPpp')}
+                          </div>
+                        )}
                     </div>
+                    <Separator />
+                    <div className="max-h-[calc(100vh-500px)] overflow-scroll flex flex-col">
+                        <div className="p-0 flex flex-col gap-4">
+                          {thread.emails.map(email => {
+                            return <EmailDisplay key={email.id} email={email} />
+                          })}
+                        </div>
+                    </div>
+                    <div className="flex-1"></div>
+                    <Separator className="mt-auto"/>
+                    {/* Reply Box */}
+                    Reply Box   
                 </div>
             </> : <>
             <div className="p-8 text-center text-muted-foreground">
