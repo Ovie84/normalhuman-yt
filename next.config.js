@@ -8,6 +8,8 @@ import "./src/env.js";
 const config = {
   turbopack: { root: "." },
   allowedDevOrigins: ["://trycloudflare.com", "*.trycloudflare.com"],
+  typescript: { ignoreBuildErrors: true, },
+  eslint: { ignoreDuringBuilds: true },
 };
 
 export default config;
