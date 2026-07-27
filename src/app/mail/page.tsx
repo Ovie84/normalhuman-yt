@@ -1,16 +1,17 @@
-"use client"
+"use client";
 
 import dynamic from 'next/dynamic'
 import React from 'react'
 //import Mail from './mail' 
 
-const Mail = dynamic(()=>{
-  return import('./mail')
-},
+const Mail = dynamic(()=>/*{*/
+  /*return*/ import('./mail'),
+  { ssr: false }
+// },
 // {
 //   ssr: false // this is a client component, so we set ssr to false
 // }
-)
+);
 
 const MailDashboard = () => {
   return (

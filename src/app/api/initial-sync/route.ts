@@ -17,7 +17,8 @@ export const POST = async (req: NextRequest) => {
     })
     if (!dbAccount) return NextResponse.json({error: 'Account not founded1'}, {status: 404})
 
-    const account = new Account(dbAccount.accessToken)
+    // const account = new Account(dbAccount.accessToken)
+    const account = new Account(dbAccount.token)
 
     // here we would trigger the initial sync process to fetch emails and other data from the email account using the access token stored in the database
     //const emails = await account.performInitialSync(/*dbAccount.accessToken*/)

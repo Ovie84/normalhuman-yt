@@ -39,7 +39,7 @@ async function upsertEmail(email: EmailMessage, accountId: string, index: number
         }
 
         const addressMap = new Map(
-            upsertedAddresses.filter(Boolean).map(address => [address.address, address])
+            upsertedAddresses.filter(Boolean).map(address => [address!.address, address])
         )
 
         const fromAddress = addressMap.get(email.from.address);

@@ -79,8 +79,9 @@ export const POST = async (request: Request) => {
         }
 
         return new Response("Webhook received", { status:200 });
-    } catch (error: any) {
-        console.error("Webhook route error execution details:", error.message);
+    } catch (error) {
+        const err = error as Error;
+        console.error("Webhook route error execution details:", err.message);
         return new Response("Internal Server Error", {status: 500});
     }
 }

@@ -6,7 +6,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export async function middleware(req: NextRequest) {
 //   const auth = await getAuth(req);
-const { getUser, isAuthenticated } = await getKindeServerSession();
+const { getUser, isAuthenticated } = /*await*/ getKindeServerSession();
 
 const user = await getUser();
 const loggedIn = await isAuthenticated();

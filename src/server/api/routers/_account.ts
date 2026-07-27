@@ -9,7 +9,7 @@ export const authourizeAccountAccess = async (accountId: string, userId: string)
             id: accountId,
             userId
         }, select: {
-            id: true, emailAddress: true, name: true, accessToken: true
+            id: true, emailAddress: true, name: true, /*accessToken*/token: true
         }
     })
     if (!account) throw new Error('Access not found')
@@ -87,6 +87,7 @@ export const accountRouter = createTRPCRouter({
                         body: true,
                         bodySnippet: true,
                         emailLabel: true,
+                        sysLabels: true,
                         subject: true,
                         id: true,
                         sentAt: true,

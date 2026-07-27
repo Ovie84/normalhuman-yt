@@ -10,7 +10,7 @@ import { db } from "@/server/db"
 import axios from "axios"
 
 export const GET = async( req: NextRequest ) => {
-    const { getUser } = await getKindeServerSession()
+    const { getUser } = /*await*/ getKindeServerSession()
     const user = await getUser()
     const userId = user?.id
     // const userId = await getKindeServerSession();

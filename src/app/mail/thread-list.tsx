@@ -5,7 +5,7 @@ import React, { type ComponentProps } from 'react'
 import { format, formatDistanceToNow } from 'date-fns'
 import { cn } from '@/lib/utils'
 import DOMPurify from 'dompurify'
-import type { Badge } from '@/components/ui/badge'
+import { Badge } from '@/components/ui/badge'
 import { threadId } from 'worker_threads'
 
 const ThreadList = () => {
@@ -37,7 +37,7 @@ const ThreadList = () => {
                             <div className='flex items-center'>
                                 <div className='flex item-center gap-2'>
                                     <div className='font-semibold'>
-                                        {thread.emails.at(-1).from.name}
+                                        {thread.emails.at(-1)?.from?.name}
                                     </div>
                                 </div>
                                 <div className={
@@ -58,9 +58,9 @@ const ThreadList = () => {
                         {thread.emails[0]?.sysLabels.length && (
                             <div className='flex item-center gap-2'>
                                 {thread.emails[0]?.sysLabels.map(label => {
-                                    return <body key={label} variant={getBadgeVariantFromLabel(label)}>
+                                    return <Badge key={label} variant={getBadgeVariantFromLabel(label)}>
                                         {label}
-                                    </body>
+                                    </Badge>
                                 })}
                             </div>
                         )}
