@@ -9,7 +9,13 @@ export const env = createEnv({
   server: {
     // DATABASE_URL: z.string().url(),
     // DATABASE_URL: z.string().url().default("postgresql://dummy_user:dummy_pass@localhost:5432/dummy_db"),
-    DATABASE_URL: z.string().url() || "postgresql://dummy_user:dummy_pass@localhost:5432/dummy_db",
+    // DATABASE_URL: z.string().url() || "postgresql://dummy_user:dummy_pass@localhost:5432/dummy_db",
+
+    // Gemini suggestion
+    DATABASE_URL: z
+    .string()
+    .url()
+    .default("postgresql://dummy_user:dummy_pass@localhost:5432/dummy_db"),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
