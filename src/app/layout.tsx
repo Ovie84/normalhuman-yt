@@ -6,6 +6,7 @@ import { Geist, Figtree, Noto_Sans, Playfair_Display } from "next/font/google";
 import { TRPCReactProvider } from "@/trpc/react";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import KBar from "@/components/kbar";
 
 const playfairDisplayHeading = Playfair_Display({
   subsets: ["latin"],
@@ -46,7 +47,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <KBar>{children}</KBar>
+          </TRPCReactProvider>
         </ThemeProvider>
       </body>
     </html>

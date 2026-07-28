@@ -11,6 +11,8 @@ generator client {
 datasource db {
     provider     =   "postgresql"
 }
+// This forces Prisma to read DIRECT_URL from my .env file natively
+// url = env("DIRECT_URL") 
 
 model User {
     id           String  @id @default(cuid())
