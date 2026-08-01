@@ -47,6 +47,6 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts"
-  ],
+, "src/prisma.config.mjs"  ],
   "exclude": ["node_modules", "generated"]
 }

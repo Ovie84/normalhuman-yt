@@ -11,8 +11,8 @@ export const getAurinkoAuthorizationUrl = async (serviceType: 'Google' | 'Office
     if (!userId) throw new Error("User not found")
 
         const params = new URLSearchParams({
-            clientid: process.env.AURINKO_CLIENT_ID as string,
-            serviceType,
+            clientId: process.env.AURINKO_CLIENT_ID as string,
+            serviceType: 'Google',
             scopes: 'Mail.Read Mail.ReadWrite Mail.Send Mail.Drafts Mail.All',
             responseType: 'code',
             returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/kinde/aurinko/callback`

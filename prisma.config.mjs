@@ -9,12 +9,12 @@ export default defineConfig({
   },
 
   datasource: {
-    // url: env("DATABASE_URL"),
+    url: env("DATABASE_URL"),
     // shadowDatabaseUrl: env("DIRECT_URL"),
     // url: process.env.DIRECT_URL || process.env.DATABASE_URL || "",
 
     // Prisma 7 explicitly requires the built-in 
     // env() function wrapper to map locat strings
-    url: env("DIRECT_URL") || env("DATABASE_URL") || "",
+    // url: env("DIRECT_URL") || env("DATABASE_URL") || "",
   },
 });
