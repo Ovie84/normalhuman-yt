@@ -32,4 +32,12 @@ jobs:
           run: npm run build
           env:
             # Inject a dummy placeholder to pass the validation scripts
-            DATABASE_URL: postgresql://dummy_user:dummy_pass@localhost:5432/dummy_db
+            DATABASE_URL: postgresql://dummy_user:dummy_pass@localhost:5432/dummy_db         
+            KINDE_ISSUER_URL: https://kinde.com
+            KINDE_CLIENT_ID: dummy_id
+            KINDE_CLIENT_SECRET: dummy_secret
+            KINDE_SITE_URL: http://localhost:3000
+            KINDE_POST_LOGOUT_REDIRECT_URL: http://localhost:3000
+            KINDE_POST_LOGIN_REDIRECT_URL: http://localhost:3000/dashboard
+            
+
