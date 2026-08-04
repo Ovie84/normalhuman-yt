@@ -1,18 +1,20 @@
-'use client'
-import React from 'react'
-import { Button } from './ui/button'
-import { getAurinkoAuthorizationUrl } from '@/lib/aurinko'
+"use client";
+import React from "react";
+import { Button } from "./ui/button";
+import { getAurinkoAuthorizationUrl } from "@/lib/aurinko";
 
 const LinkAccountButton = () => {
   return (
-    <Button onClick={async () => {
-        const authUrl = await getAurinkoAuthorizationUrl('Google')
-        window.location.href = authUrl
-//        console.log(authUrl)
-    }}>
+    <Button
+      onClick={async () => {
+        const authUrl = await getAurinkoAuthorizationUrl("Google");
+        window.location.href = authUrl;
+        console.log(authUrl);
+      }}
+    >
       LinkAccountButton
     </Button>
-  )
-}
+  );
+};
 
-export default LinkAccountButton
+export default LinkAccountButton;

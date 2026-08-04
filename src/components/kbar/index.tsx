@@ -12,7 +12,8 @@ import RenderResults from "./render-results";
 import { useLocalStorage } from "usehooks-ts";
 
 export default function KBar({ children }: { children: React.ReactNode }) {
-  const [tab, setTab] = useLocalStorage('normalhuman-tab', 'inbox')
+  const [tab, setTab] = useLocalStorage('normalhuman-tab', 'inbox');  
+  const [done, setDone] = useLocalStorage('normalhuman-done', false);
 
   const actions: Action[] = [
     {
@@ -48,6 +49,28 @@ export default function KBar({ children }: { children: React.ReactNode }) {
         setTab('Sent');
       },
     },
+    {
+      id: "pendingAction",  
+      name: "See done",  
+      shortcut: ['g', 'd'],
+      keywords: "done",
+      section: "Navigation",
+      subtitle: "View your done emails",
+      perform: () => {
+        setDone(true);
+      },
+    }, 
+    {
+      id: "doneAction",
+      name: "See pending",
+      shortcut: ['g', 'u'],
+      keywords: 'pending undone, not done',
+      section: 'Navigation',
+      subtitle: 'View the pending emails',
+      perform: () => {
+        setDone(false);
+      },
+    }, 
   ];
   return (
     <KBarProvider actions={actions}>

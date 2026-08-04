@@ -3,7 +3,7 @@
 import axios from "axios"
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 
-export const getAurinkoAuthorizationUrl = async (serviceType: 'Google' | 'Office365') => {
+export const getAurinkoAuthorizationUrl = async (serviceType: 'Google' | 'Office365' | 'Outlook' | 'IMAP' | 'iCloud') => {
     const { getUser } = /*await*/ getKindeServerSession()
     const user = await getUser()
     const userId = user?.id
@@ -12,10 +12,10 @@ export const getAurinkoAuthorizationUrl = async (serviceType: 'Google' | 'Office
 
         const params = new URLSearchParams({
             clientId: process.env.AURINKO_CLIENT_ID as string,
-            serviceType: 'Google',
+            serviceType: serviceType,
             scopes: 'Mail.Read Mail.ReadWrite Mail.Send Mail.Drafts Mail.All',
             responseType: 'code',
-            returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/kinde/aurinko/callback`
+            returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/aurinko/callback`
         })
 
         return `https://api.aurinko.io/v1/auth/authorize?${params.toString()}`

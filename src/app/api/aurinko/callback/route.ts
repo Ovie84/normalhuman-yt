@@ -9,28 +9,29 @@ import { exchangeCodeForAccessToken, getAccountDetails } from "@/lib/aurinko"
 import { db } from "@/server/db"
 import axios from "axios"
 
-export const GET = async( req: NextRequest ) => {
+export const GET = async (req: NextRequest) => {
     const { getUser } = /*await*/ getKindeServerSession()
     const user = await getUser()
     const userId = user?.id
+    console.log("User ID:", userId);
     // const userId = await getKindeServerSession();
-    if(!userId) return NextResponse.json({message: "No user founded0"}, { status: 401})
+    if (!userId) return NextResponse.json({ message: "No user founded0" }, { status: 401 })
     const params = req.nextUrl.searchParams
     //const params = new URL(req.url).searchParams
     const status = params.get('status')
-    if (status != 'success') return NextResponse.json({ message: "Authentication failed to link account"}, { status: 400})
+    if (status != 'success') return NextResponse.json({ message: "Authentication failed to link account" }, { status: 400 })
 
     // get the code to exchange for an access token
     const code = params.get('code')
-    if (!code) return NextResponse.json({ message: 'No code provided'}, {status: 400})
+    if (!code) return NextResponse.json({ message: 'No code provided' }, { status: 400 })
     const token = await exchangeCodeForAccessToken(code)
-    if (!token) return NextResponse.json({message: 'Failed to exchange code for access token'}, { status: 500})
+    if (!token) return NextResponse.json({ message: 'Failed to exchange code for access token' }, { status: 500 })
     console.log(userId)
 
     const accountDetails = await getAccountDetails(token.accessToken)
 
     await db.account.upsert({
-        where: { id: token.accountId.toString()},
+        where: { id: token.accountId.toString() },
         update: {
             // accessToken: token.accessToken,
             token: token.accessToken,
@@ -53,9 +54,9 @@ export const GET = async( req: NextRequest ) => {
             accountId: token.accountId.toString(),
             userId
         }).then(response => {
-            console.log("Initial sync triggered successfully", response.data)  
-        }).catch (error => {
-            console.error('Failed to trigger initial sync endpoint', error)  
+            console.log("Initial sync triggered successfully", response.data)
+        }).catch(error => {
+            console.error('Failed to trigger initial sync endpoint', error)
         })
     )
 
