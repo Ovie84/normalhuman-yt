@@ -72,5 +72,6 @@ const ResultItem = React.forwardRef(
         );
     }
 );
+ResultItem.displayName = "ResultItem";
 
 export default ResultItem;

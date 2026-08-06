@@ -8,13 +8,6 @@ import { PrismaClient } from '@prisma/client';
 // Prisma@v7 implementaion
 import { PrismaPg } from '@prisma/adapter-pg';
 import pg from 'pg';
-// import { env } from "@/env";
-
-// const createPrismaClient = () =>
-//   new PrismaClient({
-//     log:
-//       env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
-//   });
 
 // Prisma@v7 implementation
 const createPrismaClient = () => {
