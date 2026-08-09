@@ -132,3 +132,14 @@
     @apply font-sans;
   }
 }
+
+.tiptap.ProseMirror {
+  /* @apply bg-background text-foreground; */
+  outline: none;
+}
+
+.ts-active {
+  background-color: white;
+  border-radius: 4px;
+  padding: 0px 2px;
+}

@@ -22,7 +22,10 @@ type AccountSwitcherProps = {
 };
 
 export function AccountSwitcher ({ isCollapsed }: AccountSwitcherProps)  {
-  const { data: accounts } = api.mail.getAccounts.useQuery();
+
+  // const { data: accounts } = api.mail.getAccounts.useQuery();
+  const { data: accounts } = api.account.getAccounts.useQuery();
+
   //const {accountId, setAccountId} = React.useState()
   const [accountId, setAccountId] = useLocalStorage("accountId", "");
 

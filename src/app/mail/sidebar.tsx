@@ -18,8 +18,8 @@ const Sidebar = ({ isCollapsed }: Props) => {
 
   const refetchInterval = 5000;
 
-  // const { data: inboxThreads } = api.account.getNumThreads.useQuery(
-  const { data: inboxThreads } = api.mail.getNumThreads.useQuery(
+  const { data: inboxThreads } = api.account.getNumThreads.useQuery(
+  // const { data: inboxThreads } = api.mail.getNumThreads.useQuery(
     {
       accountId,
       tab: "inbox",
@@ -29,8 +29,8 @@ const Sidebar = ({ isCollapsed }: Props) => {
     },
   );
 
-  // const { data: draftThreads } = api.account.getNumThreads.useQuery(
-  const { data: draftThreads } = api.mail.getNumThreads.useQuery(
+  const { data: draftThreads } = api.account.getNumThreads.useQuery(
+  // const { data: draftThreads } = api.mail.getNumThreads.useQuery(
     {
       accountId,
       tab: "drafts",
@@ -40,8 +40,8 @@ const Sidebar = ({ isCollapsed }: Props) => {
     },
   );
 
-  // const { data: sentThreads } = api.account.getNumThreads.useQuery(
-  const { data: sentThreads } = api.mail.getNumThreads.useQuery(
+  const { data: sentThreads } = api.account.getNumThreads.useQuery(
+  // const { data: sentThreads } = api.mail.getNumThreads.useQuery(
     {
       accountId,
       tab: "sent",
